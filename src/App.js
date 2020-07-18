@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./components/Header/Header";
 import {Switch, Route} from "react-router-dom";
 import Home from "./components/Home/Home";
-import Formik from "./components/Formik/Formik";
+import FormikForm from "./components/FormikForm/FormikForm";
 import Calculator from "./components/Calculator/Calculator";
 import TaskList from "./components/TaskList/TaskList";
 import About from "./components/About/About";
@@ -19,7 +19,7 @@ function App() {
             <Header/>
             <Switch>
                 <Route exact path="/" component={Home}/>
-                <Route exact path="/formik" component={Formik}/>
+                <Route exact path="/formik" component={FormikForm}/>
                 <Route exact path="/calculator" component={Calculator}/>
                 <Route exact path="/task-list" component={TaskList}/>
                 <Route exact path="/about" component={About}/>
