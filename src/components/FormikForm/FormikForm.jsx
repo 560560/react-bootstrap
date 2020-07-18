@@ -113,15 +113,11 @@ const FormikForm = (props) => {
                                 <Button className="" type="submit">Login</Button>
                             </Col>
                         </Form.Group>
-
                     </Form>
-
 
                 )}
 
-
             </Formik>
-
         </Container>
 
     );
