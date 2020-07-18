@@ -1,9 +1,12 @@
 import React from 'react';
+import CarouselBox from "../Common/CarouselBox/CarouselBox";
+
 
 const Home = (props) => {
     return (
         <div>
-            Home
+                <CarouselBox/>
+
         </div>
     );
 }
