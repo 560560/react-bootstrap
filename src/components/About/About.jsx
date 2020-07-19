@@ -1,13 +1,16 @@
 import React from 'react';
 import {Container, Tab, Col, Row, Nav} from "react-bootstrap";
 
+
 const About = (props) => {
+
+
     return (
         <Container>
             <Tab.Container id="AboutBlock" defaultActiveKey="first">
                 <Row>
                     <Col sm={2}>
-                        <Nav variant="pills" className="flex-column mt-3">
+                        <Nav variant="pills" className="flex-column mt-3 " >
                             <Nav.Item>
                                 <Nav.Link eventKey="first">Design</Nav.Link>
                             </Nav.Item>
@@ -29,6 +32,7 @@ const About = (props) => {
                         <Tab.Content className="mt-3">
                             <Tab.Pane eventKey="first">
                                 <img
+                                    className="img-fluid "
                                     height="500"
                                     src="https://speckyboy.com/wp-content/uploads/2019/11/free-figma-ui-tmeplate-13.jpg"
                                     alt=""/>
@@ -40,6 +44,7 @@ const About = (props) => {
                             </Tab.Pane>
                             <Tab.Pane eventKey="second">
                                 <img
+                                    className="img-fluid"
                                     height="500"
                                     src="https://figma.imgix.net/2Bg3E11i36sqsemMasYMyK/b635c4ef507c46bfc30c2ce79db42628/designers.png?&w=1060&auto=compress%2Cformat&crop=entropy&fit=crop&q=75"
                                     alt=""/>
@@ -51,6 +56,7 @@ const About = (props) => {
                             </Tab.Pane>
                             <Tab.Pane eventKey="third">
                                 <img
+                                    className="img-fluid"
                                     height="500"
                                     src="https://i.ytimg.com/vi/ZcdQ-E-3xfw/maxresdefault.jpg"
                                     alt=""/>
@@ -62,6 +68,7 @@ const About = (props) => {
                             </Tab.Pane>
                             <Tab.Pane eventKey="fourth">
                                 <img
+                                    className="img-fluid"
                                     height="500"
                                     src="https://cdn.webrazzi.com/uploads/2019/12/figma-auto-layout-923.png"
                                     alt=""/>
@@ -71,8 +78,9 @@ const About = (props) => {
                                     obcaecati odit pariatur perferendis, quam quasi ratione reiciendis, sunt tempora
                                     voluptate.</p>
                             </Tab.Pane>
-                            <Tab.Pane eventKey="fifth">
+                            <Tab.Pane eventKey="fifth " >
                                 <img
+                                    className="img-fluid"
                                     height="500"
                                     src="https://www.theme-junkie.com/wp-content/uploads/Omega-Landing-Page-UI-Kit-for-Figma.jpg"
                                     alt=""/>
@@ -87,6 +95,9 @@ const About = (props) => {
                     </Col>
                 </Row>
             </Tab.Container>
+
+
+
         </Container>
     );
 }

@@ -6,6 +6,13 @@ import passwordIcon from '../../assets/images/passwordlIcon.svg'
 import emailIcon from '../../assets/images/emailIcon.svg'
 
 
+const getLoginData = (formData) => {
+
+    console.log(formData)
+
+}
+
+
 const FormikForm = (props) => {
 
     const validationSchema = Yup.object({
@@ -22,7 +29,8 @@ const FormikForm = (props) => {
 
     return (
         <Container style={{width: "500px"}}>
-            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={console.log}>
+            <h1 className="text-center pt-4 pb-3">Login form</h1>
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={getLoginData}>
 
                 {({
                       handleSubmit,
@@ -34,7 +42,7 @@ const FormikForm = (props) => {
                       errors,
                   }) => (
                     <Form noValidate onSubmit={handleSubmit} className="mt-4">
-                        <Form.Group as={Row} controlId="formHorizontalEmail">
+                        <Form.Group as={Row} controlId="Email">
                             <Form.Label column sm={4} className="font-weight-bold text-right">
                                 Email
                             </Form.Label>
@@ -48,12 +56,10 @@ const FormikForm = (props) => {
                                     <Form.Control
                                         type="text"
                                         name="email"
-                                        aria-describedby="inputGroupPrepend"
-                                        value={values.email}
                                         onChange={handleChange}
                                         isInvalid={touched.email && !!errors.email}
                                         isValid={touched.email && !errors.email}
-
+                                        autoComplete="email"
                                     />
 
                                     <Form.Control.Feedback type="invalid" className="text-center">
@@ -65,7 +71,7 @@ const FormikForm = (props) => {
                         </Form.Group>
 
 
-                        <Form.Group as={Row} controlId="formHorizontalPassword">
+                        <Form.Group as={Row} controlId="Password">
                             <Form.Label column sm={4} className="font-weight-bold text-right">
                                 Password
                             </Form.Label>
@@ -79,21 +85,21 @@ const FormikForm = (props) => {
                                     <Form.Control
                                         type="password"
                                         name="password"
-                                        aria-describedby="inputGroupPrepend"
-                                        value={values.password}
                                         onChange={handleChange}
                                         isInvalid={touched.password && !!errors.password}
                                         isValid={touched.password && !errors.password}
+                                        autoComplete="new-password"
 
                                     />
-                                    <Form.Control.Feedback type="invalid" className="text-center d-inline-block">
+                                    <Form.Control.Feedback type="invalid" className="text-center">
                                         {errors.password}
                                     </Form.Control.Feedback>
                                 </InputGroup>
                             </Col>
                         </Form.Group>
 
-                        <Form.Group as={Row} controlId="formHorizontalRememberMe" className="d-flex align-items-center">
+
+                        <Form.Group as={Row} controlId="RememberMe" className="d-flex align-items-center">
                             <Form.Label column sm={4} className="font-weight-bold text-right">
                                 Remember Me
                             </Form.Label>
@@ -109,8 +115,7 @@ const FormikForm = (props) => {
 
                             </Col>
                             <Col sm={4} className="d-flex  justify-content-end">
-
-                                <Button className="" type="submit">Login</Button>
+                                <Button className="" type="submit1" variant="info">Login</Button>
                             </Col>
                         </Form.Group>
                     </Form>
