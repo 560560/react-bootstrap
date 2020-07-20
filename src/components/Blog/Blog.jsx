@@ -1,10 +1,17 @@
 import React from 'react';
+import {Col, Container, Media, Row} from "react-bootstrap";
 
 const Blog = (props) => {
     return (
-        <div>
-            Blog
-        </div>
+        <Container>
+            <Row>
+                <Col md={9}>
+                    <Media>
+                        <img src="" alt=""/>
+                    </Media>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 
