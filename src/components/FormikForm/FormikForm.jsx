@@ -57,6 +57,7 @@ const FormikForm = (props) => {
                                         type="text"
                                         name="email"
                                         onChange={handleChange}
+                                        value={values.email}
                                         isInvalid={touched.email && !!errors.email}
                                         isValid={touched.email && !errors.email}
                                         autoComplete="email"

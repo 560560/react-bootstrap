@@ -36,10 +36,13 @@ const Contacts = (props) => {
                 <h1 className="text-center">Contact us</h1>
                 <Formik initialValues={initialValues}
                         validationSchema={validationSchema}
-                        onSubmit={getSDataFromForm}
                         validateOnChange={validationRequired}
                         validateOnBlur={validationRequired}
-                         >
+                        onSubmit={(values, {resetForm}) => {
+                            getSDataFromForm(values)
+                            resetForm()
+                        }}
+                >
                     {({
                           handleSubmit,
                           handleChange,
@@ -50,11 +53,12 @@ const Contacts = (props) => {
                       }) => (
 
 
-                        <Form  noValidate onSubmit={handleSubmit} >
+                        <Form noValidate onSubmit={handleSubmit}>
 
                             <Row className="mt-4 mb-3">
 
                                 <Col>
+
                                     <Form.Label>First name</Form.Label>
                                     <Form.Control type="text"
                                                   name="firstName"
@@ -64,14 +68,14 @@ const Contacts = (props) => {
                                                   isValid={touched.firstName && !errors.firstName}
                                                   isInvalid={touched.firstName && !!errors.firstName}
                                     />
-
                                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                     <Form.Control.Feedback type="invalid" className="justify-content-end d-flex">
                                         {errors.firstName}
                                     </Form.Control.Feedback>
-                                </Col>
 
+                                </Col>
                                 <Col>
+
                                     <Form.Label>Second name</Form.Label>
                                     <Form.Control type="text"
                                                   name="secondName"
@@ -85,8 +89,10 @@ const Contacts = (props) => {
                                     <Form.Control.Feedback type="invalid" className="justify-content-end d-flex">
                                         {errors.secondName}
                                     </Form.Control.Feedback>
+
                                 </Col>
                             </Row>
+
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Email address</Form.Label>
                                 <Form.Control type="email"
@@ -96,7 +102,7 @@ const Contacts = (props) => {
                                               onChange={handleChange}
                                               isInvalid={touched.email && !!errors.email}
                                               isValid={touched.email && !errors.email}
-                                              />
+                                />
                                 <Row>
                                     <Col sm={7}><Form.Text muted>We'll never share your email with anyone
                                         else.</Form.Text></Col>
@@ -109,7 +115,6 @@ const Contacts = (props) => {
 
 
                             </Form.Group>
-
                             <Form.Group controlId="formBasicMessage">
                                 <Form.Label>Message</Form.Label>
                                 <Form.Control as="textarea"
@@ -118,7 +123,7 @@ const Contacts = (props) => {
                                               value={values.message}
                                               onChange={handleChange}
                                               isInvalid={touched.message && !!errors.message}
-                                              />
+                                />
                                 <Form.Control.Feedback type="invalid" className="justify-content-end d-flex ">
                                     {errors.message}
                                 </Form.Control.Feedback>
@@ -129,9 +134,10 @@ const Contacts = (props) => {
                                             label="Check me out"
                                             onChange={handleChange}
 
-                                            />
+                                />
                             </Form.Group>
-                            <Button variant="primary" type="submit" onClick={()=>setValidationRequired(true)}>Submit</Button>
+                            <Button variant="primary" type="submit"
+                                    onClick={() => setValidationRequired(true)}>Submit</Button>
                         </Form>
                     )}
                 </Formik>
