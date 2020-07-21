@@ -11,23 +11,23 @@ const CarouselBox = (props) => {
             <Carousel.Item>
                 <img className="d-block w-100 " src={forest1} alt="Forest"/>
                 <Carousel.Caption>
-                    <h3>Nature</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, perspiciatis.</p>
+                    <h3 className="d-sm-block">Nature</h3>
+                    <p className="d-sm-block d-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, perspiciatis.</p>
                 </Carousel.Caption>
             </Carousel.Item>
 
             <Carousel.Item>
                 <img className="d-block w-100" src={earth} alt="Space"/>
                 <Carousel.Caption>
-                    <h3>Space</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, perspiciatis.</p>
+                    <h3 className="d-sm-block">Space</h3>
+                    <p className="d-sm-block d-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, perspiciatis.</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img className="d-block w-100" src={palms} alt="Palms"/>
                 <Carousel.Caption>
-                    <h3>Palms beach</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, perspiciatis.</p>
+                    <h3 className="d-sm-block">Palms beach</h3>
+                    <p className="d-sm-block d-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, perspiciatis.</p>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>

@@ -29,7 +29,7 @@ const Header = (props) => {
 
                         </Nav>
                     </Navbar.Collapse>
-                    <Form id="responsive-navbar-nav" inline>
+                    <Form id="responsive-navbar-nav" inline className="d-sm-none d-none d-md-inline-block">
                         <FormControl type="text" placeholder="Search" className="mr-sm-2"/>
                         <Button variant="outline-info">Search</Button>
                     </Form>

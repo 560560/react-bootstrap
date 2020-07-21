@@ -78,11 +78,11 @@ const About = (props) => {
                                     obcaecati odit pariatur perferendis, quam quasi ratione reiciendis, sunt tempora
                                     voluptate.</p>
                             </Tab.Pane>
-                            <Tab.Pane eventKey="fifth " >
+                            <Tab.Pane eventKey="fifth" >
                                 <img
                                     className="img-fluid"
                                     height="500"
-                                    src="https://www.theme-junkie.com/wp-content/uploads/Omega-Landing-Page-UI-Kit-for-Figma.jpg"
+                                    src="https://www.infiniteloop.com.br/wp-content/uploads/2017/09/image1.jpg"
                                     alt=""/>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur beatae
                                     consequuntur corporis debitis delectus distinctio dolorem doloribus enim eum

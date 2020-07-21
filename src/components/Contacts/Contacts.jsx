@@ -23,124 +23,117 @@ const Contacts = (props) => {
     }
 
     const validationSchema = Yup.object({
-        firstName: Yup.string().required("This field is required").max(10),
-        secondName: Yup.string().required("This field is required").max(12),
-        email: Yup.string().required("This field is required").email("Please enter valid email"),
+        firstName: Yup.string().required("First name is required").max(10),
+        secondName: Yup.string().required("Second name is required").max(12),
+        email: Yup.string().required("Email is required").email("Enter valid email"),
         message: Yup.string().max(12),
     })
 
 
     return (
         <div>
-            <Container style={{width: "500px"}}>
-                <h1 className="text-center">Contact us</h1>
-                <Formik initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        validateOnChange={validationRequired}
-                        validateOnBlur={validationRequired}
-                        onSubmit={(values, {resetForm}) => {
-                            getSDataFromForm(values)
-                            resetForm()
-                        }}
-                >
-                    {({
-                          handleSubmit,
-                          handleChange,
-                          isValid,
-                          values,
-                          touched,
-                          errors
-                      }) => (
+            <Container>
+                <Row className="justify-content-center mb-5">
+                    <Col xl= {6} lg={7} md={9} sm={10} className="col-12">
+                    <h1 className="text-center">Contact us</h1>
+                    <Formik initialValues={initialValues}
+                            validationSchema={validationSchema}
+                            validateOnChange={validationRequired}
+                            validateOnBlur={validationRequired}
+                            onSubmit={(values, {resetForm}) => {
+                                getSDataFromForm(values)
+                                resetForm()
+                            }}
+                    >
+                        {({
+                              handleSubmit,
+                              handleChange,
+                              isValid,
+                              values,
+                              touched,
+                              errors
+                          }) => (
 
 
-                        <Form noValidate onSubmit={handleSubmit}>
+                            <Form noValidate onSubmit={handleSubmit}>
 
-                            <Row className="mt-4 mb-3">
+                                <Row className="mt-4 mb-3">
+                                    {[
+                                        {title: "First name", dataLabel: "firstName"},
+                                        {title: "Second name", dataLabel: "secondName"},
+                                    ].map((item, i) =>
 
-                                <Col>
+                                        <Col key={i}>
 
-                                    <Form.Label>First name</Form.Label>
-                                    <Form.Control type="text"
-                                                  name="firstName"
-                                                  value={values.firstName}
-                                                  placeholder="Enter your first name"
-                                                  onChange={handleChange}
-                                                  isValid={touched.firstName && !errors.firstName}
-                                                  isInvalid={touched.firstName && !!errors.firstName}
-                                    />
-                                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                                    <Form.Control.Feedback type="invalid" className="justify-content-end d-flex">
-                                        {errors.firstName}
-                                    </Form.Control.Feedback>
+                                            <Form.Label>{item.title}</Form.Label>
+                                            <Form.Control type="text"
+                                                          name={item.dataLabel}
+                                                          value={values[item.dataLabel]}
+                                                          placeholder={item.title}
+                                                          onChange={handleChange}
+                                                          isValid={touched[item.dataLabel] && !errors[item.dataLabel]}
+                                                          isInvalid={touched[item.dataLabel] && !!errors[item.dataLabel]}
+                                            />
+                                            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                            <Form.Control.Feedback type="invalid"
+                                                                   className="justify-content-end d-flex">
+                                                {errors[item.dataLabel]}
+                                            </Form.Control.Feedback>
+                                        </Col>
+                                    )}
 
-                                </Col>
-                                <Col>
-
-                                    <Form.Label>Second name</Form.Label>
-                                    <Form.Control type="text"
-                                                  name="secondName"
-                                                  value={values.secondName}
-                                                  placeholder="Enter your second name"
-                                                  onChange={handleChange}
-                                                  isValid={touched.secondName && !errors.secondName}
-                                                  isInvalid={touched.secondName && !!errors.secondName}
-                                    />
-                                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                                    <Form.Control.Feedback type="invalid" className="justify-content-end d-flex">
-                                        {errors.secondName}
-                                    </Form.Control.Feedback>
-
-                                </Col>
-                            </Row>
-
-                            <Form.Group controlId="formBasicEmail">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email"
-                                              name="email"
-                                              value={values.email}
-                                              placeholder="Enter email"
-                                              onChange={handleChange}
-                                              isInvalid={touched.email && !!errors.email}
-                                              isValid={touched.email && !errors.email}
-                                />
-                                <Row>
-                                    <Col sm={7}><Form.Text muted>We'll never share your email with anyone
-                                        else.</Form.Text></Col>
-                                    <Col sm={5}>
-                                        <Form.Control.Feedback type="invalid" className="justify-content-end d-flex ">
-                                            {errors.email}
-                                        </Form.Control.Feedback>
-                                    </Col>
                                 </Row>
 
+                                <Form.Group controlId="formBasicEmail">
+                                    <Form.Label>Email address</Form.Label>
+                                    <Form.Control type="email"
+                                                  name="email"
+                                                  value={values.email}
+                                                  placeholder="Enter email"
+                                                  onChange={handleChange}
+                                                  isInvalid={touched.email && !!errors.email}
+                                                  isValid={touched.email && !errors.email}
+                                    />
+                                    <Row>
+                                        <Col sm={7} className="col-7"><Form.Text muted>We'll never share email.</Form.Text></Col>
+                                        <Col sm={5} className="col-5">
+                                            <Form.Control.Feedback type="invalid"
+                                                                   className="justify-content-end d-flex ">
+                                                {errors.email}
+                                            </Form.Control.Feedback>
+                                        </Col>
+                                    </Row>
 
-                            </Form.Group>
-                            <Form.Group controlId="formBasicMessage">
-                                <Form.Label>Message</Form.Label>
-                                <Form.Control as="textarea"
-                                              name="message"
-                                              rows="3"
-                                              value={values.message}
-                                              onChange={handleChange}
-                                              isInvalid={touched.message && !!errors.message}
-                                />
-                                <Form.Control.Feedback type="invalid" className="justify-content-end d-flex ">
-                                    {errors.message}
-                                </Form.Control.Feedback>
-                            </Form.Group>
-                            <Form.Group controlId="formBasicCheckbox">
-                                <Form.Check type="checkbox"
-                                            name="checkbox"
-                                            label="Check me out"
-                                            onChange={handleChange}
 
-                                />
-                            </Form.Group>
-                            <Button variant="primary" type="submit"
-                                    onClick={() => setValidationRequired(true)}>Submit</Button>
-                        </Form>
-                    )}
-                </Formik>
+                                </Form.Group>
+                                <Form.Group controlId="formBasicMessage">
+                                    <Form.Label>Message</Form.Label>
+                                    <Form.Control as="textarea"
+                                                  name="message"
+                                                  rows="3"
+                                                  value={values.message}
+                                                  onChange={handleChange}
+                                                  isInvalid={touched.message && !!errors.message}
+                                    />
+                                    <Form.Control.Feedback type="invalid" className="justify-content-end d-flex ">
+                                        {errors.message}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                                <Form.Group controlId="formBasicCheckbox">
+                                    <Form.Check type="checkbox"
+                                                name="checkbox"
+                                                label="Check me out"
+                                                onChange={handleChange}
+
+                                    />
+                                </Form.Group>
+                                <Button variant="primary" type="submit"
+                                        onClick={() => setValidationRequired(true)}>Submit</Button>
+                            </Form>
+                        )}
+                    </Formik>
+                    </Col>
+                </Row>
             </Container>
         </div>
     );
