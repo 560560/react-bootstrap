@@ -1,0 +1,63 @@
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+body {
+  height: 100vh;
+  position: relative;
+  font-family: Roboto;
+}
+
+.task-list-title {
+  color: #28A745;
+}
+
+.greeting {
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
+
+}
+
+.task-list {
+  font-size: 22px;
+}
+
+.task-list .task-done {
+  text-decoration: line-through;
+  color: #28A745;
+}
+
+.task-wrapper {
+  border: 1px solid #b9bcec;
+  padding: 5px 0;
+  border-radius: 10px;
+}
+
+.task-wrapper img {
+  vertical-align: sub;
+}
+
+.task-checkbox img {
+
+}
+
+.editTask input {
+  height: 31px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid darkgreen;
+  padding: 0;
+  outline: none;
+
+}
+
+.delete-task img,
+.edit-task img,
+.cancel-edit img {
+  height: 25px;
+  transition-duration: 0.5s;
+
+  &:hover {
+    transform: scale(1.2);
+    transition-duration: 0.5s;
+  }
+}
