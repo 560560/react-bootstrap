@@ -1,5 +1,6 @@
 import React from 'react';
 import {Col, Row} from "react-bootstrap";
+import TextareaAutosize from 'react-textarea-autosize';
 import checkboxDoneIcon from "../../assets/images/task-list/checkboxDoneIcon.svg";
 import checkboxIcon from "../../assets/images/task-list/checkboxIcon.svg";
 import applyTaskIcon from "../../assets/images/task-list/applyTaskIcon.svg";
@@ -9,9 +10,10 @@ import deleteTaskIcon from "../../assets/images/task-list/deleteTaskIcon.svg";
 import IconDescription from "./IconDescription";
 import ErrorMessage from "./ErrorMessage";
 
-const Task = ({task, i, originalValue, globalEditMode, setTaskStatus, deleteTask, setApplyChanges, setCancelEdition, taskTextChanger, activateEditMode, errorMessage,
-                  tempTaskTextOfEditMode
+const Task = ({
+                  task, i, originalValue, globalEditMode, setTaskStatus, deleteTask, setApplyChanges, setCancelEdition, taskTextChanger, activateEditMode, errorMessage,
               }) => {
+
 
     let textValue = React.createRef()
 
@@ -21,7 +23,7 @@ const Task = ({task, i, originalValue, globalEditMode, setTaskStatus, deleteTask
 
     return (
         <li className="m-3">
-            <Row className={errorMessage ? "task-wrapper" : "task-wrapper"}>
+            <Row className="task-wrapper">
                 <Col className="col-1 text-right p-0 task-checkbox">
                     <img src={task.isDone ? checkboxDoneIcon : checkboxIcon} alt="checkbox" height="24px" onClick={() => {
                         !task.editMode && setTaskStatus(i)
@@ -33,10 +35,14 @@ const Task = ({task, i, originalValue, globalEditMode, setTaskStatus, deleteTask
 
                 {task.editMode
 
-                    ? <Col className="col-8 edit-task"><input type="text" id={i} value={originalValue} ref={textValue}
-                                                              onChange={() => changeTaskText(task.text)}/>
-                <ErrorMessage errorMessage={errorMessage}/></Col>
-                    : <Col className={task.isDone ? "col-8 task-done" : "col-8"}>{task.text}</Col>
+                    ? <Col className="col-8 edit-task"><TextareaAutosize type="text" id={i} value={originalValue} ref={textValue}
+                                                                       autoFocus={true}
+                                                                       autoComplete="off"
+                                                                       onChange={() => changeTaskText(task.text)}/>
+
+
+                        <ErrorMessage errorMessage={errorMessage}/></Col>
+                    : <Col className={task.isDone ? "col-8 task-done" : "col-8 pr-sm-4"}>{task.text}</Col>
                 }
 
 

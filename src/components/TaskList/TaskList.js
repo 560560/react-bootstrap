@@ -5,12 +5,6 @@ import Task from "./Task";
 
 const TaskList = (props) => {
 
-    const prepareNewTask = () => {
-        props.addNewTask("Сделать еще что-нибудь")
-    }
-
-
-
     return (
         <Container>
             <Row className="pt-5 justify-content-center align-items-center">
@@ -25,7 +19,7 @@ const TaskList = (props) => {
                     </ul>
                     <Row className="justify-content-center">
                         <Col className="text-center">
-                            <Button disabled={props.globalEditMode} variant="success " onClick ={prepareNewTask}>Add new task</Button>
+                            <Button disabled={props.globalEditMode} variant="success " onClick={props.addNewTask}>Add new task</Button>
                         </Col>
                     </Row>
 
