@@ -50,14 +50,43 @@ body {
 
 }
 
-.delete-task img,
-.edit-task img,
-.cancel-edit img {
-  height: 25px;
-  transition-duration: 0.5s;
+.delete-task,
+.edit-task,
+.cancel-edit,
+.apply-task {
+  position: relative;
 
-  &:hover {
+  & > .icon-description {
+     visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+    position: absolute;
+  }
+
+  &:hover > .icon-description {
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    top: -21px;
+    left: 9px;
+    font-size: 10px;
+  }
+
+  & img {
+    height: 25px;
+    transition-duration: 0.5s;
+  }
+
+  &:hover img {
     transform: scale(1.2);
     transition-duration: 0.5s;
   }
+}
+
+.delete {
+  color: red;
+}
+
+.edit {
+  color: #28A745;
 }
