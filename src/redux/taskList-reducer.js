@@ -132,14 +132,13 @@ export const activateEditMode = (id, originalText) => (dispatch) => {
 
 }
 
+/* Записывает введенное временное знаяение текста задачи в текст Таски, выключает режим редактирования, обнуляя временные значения*/
 export const setApplyChanges = (id) => (dispatch) => {
     dispatch (setNewTaskText(id))
     dispatch(setEditModeOFF(id))
 }
 
 
-export const setCancelChanges = (id) => (dispatch) => {
 
-}
 
 export default taskListReducer;

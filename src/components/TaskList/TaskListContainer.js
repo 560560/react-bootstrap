@@ -21,5 +21,11 @@ const mapStateToProps = (state) => ({
 })
 
 
-
-export default compose (connect(mapStateToProps,{setTaskStatus, setEditModeOFF, deleteTask, setApplyChanges, taskTextChanger, activateEditMode}))(TaskListContainer) ;
+export default compose(connect(mapStateToProps, {
+    setTaskStatus,
+    setEditModeOFF,
+    deleteTask,
+    setApplyChanges,
+    taskTextChanger,
+    activateEditMode
+}))(TaskListContainer);
