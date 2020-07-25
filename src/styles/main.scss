@@ -32,6 +32,12 @@ body {
   border-radius: 10px;
 }
 
+.error-wrapper {
+  border: 1px solid red;
+  padding: 5px 0;
+  border-radius: 10px;
+}
+
 .task-wrapper img {
   vertical-align: sub;
 }
@@ -40,15 +46,7 @@ body {
 
 }
 
-.editTask input {
-  height: 31px;
-  width: 100%;
-  border: none;
-  border-bottom: 2px solid darkgreen;
-  padding: 0;
-  outline: none;
 
-}
 
 .delete-task,
 .edit-task,
@@ -68,8 +66,8 @@ body {
     opacity: 1;
     position: absolute;
     top: -21px;
-    left: 9px;
     font-size: 10px;
+    font-weight: bold;
   }
 
   & img {
@@ -83,10 +81,47 @@ body {
   }
 }
 
+.edit-task input {
+  height: 31px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid darkgreen;
+  padding: 0;
+  outline: none;
+
+}
+
+
 .delete {
   color: red;
+  left: 8px;
+}
+.cancel {
+  color: red;
+  left: 7px;
 }
 
 .edit {
   color: #28A745;
+  left: 14px;
 }
+
+.apply {
+  color: #28A745;
+  left: 10px;
+}
+
+.error-message {
+  position: absolute;
+  color: red;
+  top: -20px;
+  left:50%;
+  transform:translate(-50%, 0%);
+  padding: 0px 5px;
+  font-size: 18px;
+
+  background-color: white;
+}
+
+
+

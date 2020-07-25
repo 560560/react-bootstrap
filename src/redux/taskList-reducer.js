@@ -5,17 +5,21 @@ const DELETE_TASK = "taskList-reducer/DELETE-TASK"
 const CHANGE_TASK_TEXT = "taskList-reducer/CHANGE-TASK-TEXT"
 const SET_ORIGINAL_TEXT = "taskList-reducer/SET-ORIGINAL-TEXT"
 const SET_NEW_TASK_TEXT = "taskList-reducer/SET-NEW-TASK-TEXT"
+const SET_NEW_TASK = "taskList-reducer/SET-NEW-TASK"
+const SET_ERROR_MESSAGE = "taskList-reducer/SET-ERROR-MESSAGE"
 
 let initialState = {
     tasks: [
-        {text: "Выучить JavaScript", isDone: false, editMode: false},
-        {text: "Выучить React JS", isDone: true, editMode: false},
-        {text: "Выучить Next JS", isDone: false, editMode: false}
+        {text: "To learn JavaScript", isDone: true, editMode: false},
+        {text: "To learn React JS", isDone: true, editMode: false},
+        {text: "To learn Next JS", isDone: false, editMode: false},
+        {text: "Get a job as a Front-end developer", isDone: false, editMode: false}
     ],
     originalTextBeforeEditMode: null,
     tempTaskTextOfEditMode: null,
     errorMessage: null,
-    globalEditMode: false
+    globalEditMode: false,
+    addNewTaskMode: false
 }
 
 
@@ -47,6 +51,7 @@ const taskListReducer = (state = initialState, action) => {
                 globalEditMode: true
             }
         case SET_EDIT_MODE_OFF:
+
             return {
                 ...state,
                 tasks: [...state.tasks.map((task, i) => {
@@ -56,7 +61,8 @@ const taskListReducer = (state = initialState, action) => {
                 })],
                 tempTaskTextOfEditMode: null,
                 originalTextBeforeEditMode: null,
-                globalEditMode: false
+                globalEditMode: false,
+                errorMessage: null
             }
 
         case CHANGE_TASK_TEXT:
@@ -75,6 +81,18 @@ const taskListReducer = (state = initialState, action) => {
                         return {text: state.tempTaskTextOfEditMode, isDone: task.isDone, editMode: task.editMode}
                     } else return task
                 })]
+            }
+        case SET_NEW_TASK:
+            const newTask = {text: undefined, isDone: false, editMode: false}
+            return {
+                ...state, tasks: [...state.tasks, newTask],
+                addNewTaskMode: true
+
+            }
+        case SET_ERROR_MESSAGE:
+            return {
+                ...state,
+                errorMessage: action.error
             }
         default:
             return state;
@@ -100,7 +118,7 @@ export const setEditModeON = (id) => {
 }
 
 /* AC изменения editMode на true */
-export const setEditModeOFF = (id ) => {
+export const setEditModeOFF = (id) => {
     return {type: SET_EDIT_MODE_OFF, id}
 }
 
@@ -119,26 +137,56 @@ const setNewTaskText = (id) => {
     return {type: SET_NEW_TASK_TEXT, id}
 }
 
+export const setNewTask = () => {
+    return {type: SET_NEW_TASK}
+}
 
+const setErrorMessage = (error) => {
+    return {type: SET_ERROR_MESSAGE, error}
+}
 
 /* THUNK CREATORS  */
 
 /* Активация режима изменения текста задачи*/
-export const activateEditMode = (id, originalText) => (dispatch) => {
-    if (!initialState.originalTextBeforeEditMode) {
+export const activateEditMode = (id, originalText = "") => (dispatch, getState) => {
+
+    if (getState().tasksPage.addNewTaskMode) {
         dispatch(setOriginalText(originalText))
-    }
+        dispatch(setEditModeON(id))
+    } else
+        dispatch(setOriginalText(originalText))
     dispatch(setEditModeON(id))
 
 }
 
 /* Записывает введенное временное знаяение текста задачи в текст Таски, выключает режим редактирования, обнуляя временные значения*/
-export const setApplyChanges = (id) => (dispatch) => {
-    dispatch (setNewTaskText(id))
-    dispatch(setEditModeOFF(id))
+export const setApplyChanges = (id) => (dispatch, getState) => {
+
+    const tempText = getState().tasksPage.tempTaskTextOfEditMode
+
+    if (getState().tasksPage.tempTaskTextOfEditMode === null || getState().tasksPage.tempTaskTextOfEditMode === "") {
+        dispatch(setErrorMessage("Task text can't be an empty"))
+    } else if (tempText.match(/\s/g) && tempText.match(/\s/g).length === tempText.length) {
+        dispatch(setErrorMessage("Task text must contain some words"))
+    } else {
+        dispatch(setNewTaskText(id))
+        dispatch(setEditModeOFF(id))
+        dispatch(setErrorMessage(null))
+    }
+
 }
 
+export const addNewTask = () => (dispatch, getState) => {
+    dispatch(setNewTask())
+    dispatch(activateEditMode(getState().tasksPage.tasks.length - 1))
+}
 
-
+export const setCancelEdition = (id) => (dispatch, getState) => {
+    if (getState().tasksPage.addNewTaskMode) {
+        dispatch(deleteTask(id))
+        dispatch(setEditModeOFF(id))
+    } else
+        dispatch(setEditModeOFF(id))
+}
 
 export default taskListReducer;
