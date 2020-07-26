@@ -14,7 +14,9 @@ let initialState = {
         {text: "To learn React JS", isDone: true, editMode: false},
         {text: "To learn Next JS", isDone: false, editMode: false},
         {text: "Get a job as a Front-end developer", isDone: false, editMode: false},
-        {text: "Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text Test text ", isDone: false, editMode: false},
+        {text: "Task 5", isDone: false, editMode: false},
+        {text: "Task 6", isDone: false, editMode: false}
+
     ],
     originalTextBeforeEditMode: null,
     tempTaskTextOfEditMode: null,

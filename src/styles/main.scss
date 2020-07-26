@@ -1,21 +1,5 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
-body {
-  height: 100vh;
-  position: relative;
-  font-family: Roboto;
-}
-
-.task-list-title {
-  color: #28A745;
-}
-
-.greeting {
-  font-size: 26px;
-  font-weight: bold;
-  text-align: center;
-
-}
 
 .task-list {
   font-size: 22px;
@@ -42,55 +26,14 @@ body {
   vertical-align: sub;
 }
 
-.task-checkbox img {
 
-}
-
-
-
-.delete-task,
-.edit-task,
-.cancel-edit,
-.apply-task {
-  position: relative;
-
-  & > .icon-description {
-     visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.3s linear;
-    position: absolute;
-  }
-
-  &:hover > .icon-description {
-    visibility: visible;
-    opacity: 1;
-    position: absolute;
-    top: -21px;
-    font-size: 10px;
-    font-weight: bold;
-  }
-
-  & img {
-    height: 25px;
-    transition-duration: 0.5s;
-  }
-
-  &:hover img {
-    transform: scale(1.2);
-    transition-duration: 0.5s;
-  }
-}
-
-.edit-task textarea {
+.edit-task-input textarea {
   resize: none;
   overflow: hidden;
   width: 100%;
   border: none;
   border-bottom: 2px solid darkgreen;
-
-
   outline: none;
-
 }
 
 
@@ -98,6 +41,7 @@ body {
   color: red;
   left: 8px;
 }
+
 .cancel {
   color: red;
   left: 7px;
@@ -113,17 +57,118 @@ body {
   left: 10px;
 }
 
-.error-message {
-  position: absolute;
-  color: red;
-  top: -20px;
-  left:50%;
-  transform:translate(-50%, 0%);
-  padding: 0px 5px;
-  font-size: 18px;
 
-  background-color: white;
+.error-message {
+  text-align: center;
+  position: absolute;
+  top: -26px;
+  width: 280px;
+  left: 50%;
+  margin-left: -140px;
+
+  & span {
+    color: red;
+    background-color: white;
+    font-size: 18px;
+    padding: 0px 5px;
+  }
 }
 
+
+@media screen and (min-width: 1360px) {
+  .delete-task,
+  .edit-task,
+  .cancel-edit,
+  .apply-task {
+    position: relative;
+
+    & > .icon-description {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.3s linear;
+      position: absolute;
+    }
+
+    &:hover > .icon-description {
+      visibility: visible;
+      opacity: 1;
+      position: absolute;
+      top: -21px;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    & img {
+      height: 25px;
+      transition-duration: 0.5s;
+    }
+
+    &:hover img {
+      transform: scale(1.2);
+      transition-duration: 0.5s;
+    }
+  }
+
+}
+
+
+@media screen and (min-width: 621px) and (max-width: 1359px) {
+  .TL-container-wrapper {
+    min-width: 90vw;
+  }
+
+
+  .delete-task,
+  .edit-task,
+  .cancel-edit,
+  .apply-task {
+    position: relative;
+
+    & > .icon-description {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.3s linear;
+      position: absolute;
+    }
+
+
+    & img {
+      height: 20px;
+      transition-duration: 0.5s;
+    }
+
+
+  }
+
+}
+
+@media screen and (max-width: 620px) {
+  .TL-container-wrapper {
+    min-width: 97vw;
+  }
+
+  .task-wrapper img {
+    vertical-align: sub;
+    height: 20px;
+    padding-left: 8px;
+    margin-bottom: 3px;
+  }
+
+  .delete-task,
+  .edit-task,
+  .cancel-edit,
+  .apply-task {
+    display: none;
+  }
+
+  .task-done,
+  .task-number,
+  .task,
+  .edit-task-input {
+    font-size: 20px;
+  }
+
+
+}
 
 
