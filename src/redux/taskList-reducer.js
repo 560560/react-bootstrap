@@ -7,6 +7,7 @@ const SET_ORIGINAL_TEXT = "taskList-reducer/SET-ORIGINAL-TEXT"
 const SET_NEW_TASK_TEXT = "taskList-reducer/SET-NEW-TASK-TEXT"
 const SET_NEW_TASK = "taskList-reducer/SET-NEW-TASK"
 const SET_ERROR_MESSAGE = "taskList-reducer/SET-ERROR-MESSAGE"
+const SET_CHOSEN_TASK = "taskList-reducer/SET-CHOSEN-TASK"
 
 let initialState = {
     tasks: [
@@ -22,7 +23,8 @@ let initialState = {
     tempTaskTextOfEditMode: null,
     errorMessage: null,
     globalEditMode: false,
-    addNewTaskMode: false
+    addNewTaskMode: false,
+    chosenTask: null
 }
 
 
@@ -41,7 +43,8 @@ const taskListReducer = (state = initialState, action) => {
         case DELETE_TASK:
             return {
                 ...state,
-                tasks: [...state.tasks.filter((item, i) => i !== action.id)]
+                tasks: [...state.tasks.filter((item, i) => i !== action.id)],
+                chosenTask: null
             }
 
         case SET_EDIT_MODE_ON:
@@ -97,6 +100,12 @@ const taskListReducer = (state = initialState, action) => {
                 ...state,
                 errorMessage: action.error
             }
+
+        case SET_CHOSEN_TASK:
+            return {
+                ...state,
+                chosenTask: action.id
+            }
         default:
             return state;
     }
@@ -140,13 +149,23 @@ const setNewTaskText = (id) => {
     return {type: SET_NEW_TASK_TEXT, id}
 }
 
+/* AC добавления нового пустого сообщения и включения режима добавления нового сообщения */
 export const setNewTask = () => {
     return {type: SET_NEW_TASK}
 }
 
+/* AC добавления сообщения об ошибке */
 const setErrorMessage = (error) => {
     return {type: SET_ERROR_MESSAGE, error}
 }
+
+
+/* AC фиксирует id выбранной задачи в режиме ширины экрана до 620 пикселей */
+export const setChosenTask  = (id=null) => {
+    return {type: SET_CHOSEN_TASK, id}
+}
+
+
 
 /* THUNK CREATORS  */
 
@@ -179,9 +198,13 @@ export const setApplyChanges = (id) => (dispatch, getState) => {
 
 }
 
+//Добавляет новую пустую задачу и включает режим редактирования
 export const addNewTask = () => (dispatch, getState) => {
+    const newTaskId = getState().tasksPage.tasks.length
     dispatch(setNewTask())
-    dispatch(activateEditMode(getState().tasksPage.tasks.length - 1))
+    dispatch(activateEditMode(newTaskId))
+    dispatch(setChosenTask(newTaskId))
+
 }
 
 export const setCancelEdition = (id) => (dispatch, getState) => {
