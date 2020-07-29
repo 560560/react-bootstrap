@@ -194,6 +194,7 @@ export const setApplyChanges = (id) => (dispatch, getState) => {
         dispatch(setNewTaskText(id))
         dispatch(setEditModeOFF(id))
         dispatch(setErrorMessage(null))
+        dispatch(setChosenTask())
     }
 
 }

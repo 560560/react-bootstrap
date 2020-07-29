@@ -21,7 +21,6 @@ const Header = (props) => {
                         <Nav className="mr-auto">
                             <Nav.Link as={Link} to="/"> Home </Nav.Link>
                             <Nav.Link as={Link} to="/formik"> Formik </Nav.Link>
-                            <Nav.Link as={Link} to="/calculator"> Calculator </Nav.Link>
                             <Nav.Link as={Link} to="/task-list"> Task list </Nav.Link>
                             <Nav.Link as={Link} to="/about"> About us </Nav.Link>
                             <Nav.Link as={Link} to="/contacts"> Contacts </Nav.Link>

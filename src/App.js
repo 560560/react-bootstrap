@@ -4,10 +4,9 @@ import Header from "./components/Header/Header";
 import {Switch, Route} from "react-router-dom";
 import Home from "./components/Home/Home";
 import FormikForm from "./components/FormikForm/FormikForm";
-import Calculator from "./components/Calculator/Calculator";
 import About from "./components/About/About";
 import Contacts from "./components/Contacts/Contacts";
-import Blog from "./components/Blog/Blog";
+import BlogContainer from "./components/Blog/BlogContainer";
 import TaskListContainer from "./components/TaskList/TaskListContainer";
 
 
@@ -18,11 +17,10 @@ function App() {
             <Switch>
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/formik" component={FormikForm}/>
-                <Route exact path="/calculator" component={Calculator}/>
                 <Route exact path="/task-list" component={TaskListContainer}/>
                 <Route exact path="/about" component={About}/>
                 <Route exact path="/contacts" component={Contacts}/>
-                <Route exact path="/blog" component={Blog}/>
+                <Route exact path="/blog" component={BlogContainer}/>
             </Switch>
         </React.Fragment>
     );
