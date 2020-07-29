@@ -102,6 +102,8 @@ const Task = ({
 
                 </Row>
             </li>
+
+            {/* /////////////////////////// Блок отрисовки кнопок для узких экранов /////////////////////////// */}
             {chosenTask === i && screenWidth < 621
                 ? task.editMode
                     ? <div className="buttons-block">
@@ -109,7 +111,7 @@ const Task = ({
                         <Button onClick={() => setCancelEdition(i)} variant="warning">Cancel</Button>
                     </div>
                     : <div className="buttons-block">
-                        <Button onClick={() => {
+                        <Button disabled={task.isDone} onClick={() => {
                             !globalEditMode && activateEditMode(i, task.text)
                         }} variant="success">Edit</Button>
                         <Button onClick={() => deleteTask(i)} variant="danger">Delete</Button>

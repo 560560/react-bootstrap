@@ -207,6 +207,7 @@ export const addNewTask = () => (dispatch, getState) => {
 
 }
 
+//Отменяет режим редактирования задания
 export const setCancelEdition = (id) => (dispatch, getState) => {
     if (getState().tasksPage.addNewTaskMode) {
         dispatch(deleteTask(id))
