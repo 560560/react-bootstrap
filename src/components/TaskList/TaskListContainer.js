@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {compose} from "redux";
 import {connect} from "react-redux";
 import TaskList from "./TaskList";
+import {getTasksSelector} from "../../redux/tasks-selector";
 import {
     activateEditMode,
     deleteTask,
@@ -10,8 +11,9 @@ import {
     setCancelEdition,
     setTaskStatus,
     addNewTask,
-    setChosenTask
+    setChosenTask, setHideDoneTask
 } from "../../redux/taskList-reducer"
+
 
 class TaskListContainer extends Component {
     render() {
@@ -24,12 +26,13 @@ class TaskListContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    tasks: state.tasksPage.tasks,
+    tasks: getTasksSelector(state),
     originalValue: state.tasksPage.tempTaskTextOfEditMode,
     globalEditMode: state.tasksPage.globalEditMode,
     errorMessage: state.tasksPage.errorMessage,
     chosenTask: state.tasksPage.chosenTask,
-    tempTaskTextOfEditMode: state.tasksPage.tempTaskTextOfEditMode
+    tempTaskTextOfEditMode: state.tasksPage.tempTaskTextOfEditMode,
+    hideDoneTask: state.tasksPage.hideDoneTask
 })
 
 
@@ -41,5 +44,6 @@ export default compose(connect(mapStateToProps, {
     taskTextChanger,
     activateEditMode,
     addNewTask,
-    setChosenTask
+    setChosenTask,
+    setHideDoneTask
 }))(TaskListContainer);

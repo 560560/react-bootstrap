@@ -8,15 +8,15 @@ const SET_NEW_TASK_TEXT = "taskList-reducer/SET-NEW-TASK-TEXT"
 const SET_NEW_TASK = "taskList-reducer/SET-NEW-TASK"
 const SET_ERROR_MESSAGE = "taskList-reducer/SET-ERROR-MESSAGE"
 const SET_CHOSEN_TASK = "taskList-reducer/SET-CHOSEN-TASK"
+const SET_HIDE_DONE_TASK = "taskList-reducer/SET-HIDE-DONE-TASK"
 
 let initialState = {
     tasks: [
-        {text: "To learn JavaScript", isDone: true, editMode: false},
-        {text: "To learn React JS", isDone: true, editMode: false},
-        {text: "To learn Next JS", isDone: false, editMode: false},
-        {text: "Get a job as a Front-end developer", isDone: false, editMode: false},
-        {text: "Task 5", isDone: false, editMode: false},
-        {text: "Task 6", isDone: false, editMode: false}
+        {text: "To learn JavaScript", isDone: true, editMode: false, id: 0},
+        {text: "To learn React JS", isDone: true, editMode: false, id: 1},
+        {text: "To learn Next JS", isDone: false, editMode: false, id: 2},
+        {text: "Get a job as a Front-end developer", isDone: false, editMode: false, id: 3},
+        {text: "To do something", isDone: false, editMode: false, id: 4}
 
     ],
     originalTextBeforeEditMode: null,
@@ -24,7 +24,8 @@ let initialState = {
     errorMessage: null,
     globalEditMode: false,
     addNewTaskMode: false,
-    chosenTask: null
+    chosenTask: null,
+    hideDoneTask: false
 }
 
 
@@ -33,9 +34,9 @@ const taskListReducer = (state = initialState, action) => {
         case SET_TASK_STATUS:
             return {
                 ...state,
-                tasks: [...state.tasks.map((task, i) => {
-                    if (i === action.id) {
-                        return {text: task.text, isDone: !task.isDone, editMode: false}
+                tasks: [...state.tasks.map((task) => {
+                    if (task.id === action.id) {
+                        return {text: task.text, isDone: !task.isDone, editMode: false, id: action.id}
                     } else return task
                 })]
             }
@@ -43,15 +44,15 @@ const taskListReducer = (state = initialState, action) => {
         case DELETE_TASK:
             return {
                 ...state,
-                tasks: [...state.tasks.filter((item, i) => i !== action.id)],
+                tasks: [...state.tasks.filter((task) => task.id !== action.id)],
                 chosenTask: null
             }
 
         case SET_EDIT_MODE_ON:
             return {
-                ...state, tasks: [...state.tasks.map((task, i) => {
-                    if (i === action.id) {
-                        return {text: task.text, isDone: task.isDone, editMode: true}
+                ...state, tasks: [...state.tasks.map((task) => {
+                    if (task.id === action.id) {
+                        return {text: task.text, isDone: task.isDone, editMode: true, id:action.id}
                     } else return task
                 })],
                 globalEditMode: true
@@ -60,9 +61,9 @@ const taskListReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                tasks: [...state.tasks.map((task, i) => {
-                    if (i === action.id) {
-                        return {text: task.text, isDone: task.isDone, editMode: false}
+                tasks: [...state.tasks.map((task) => {
+                    if (task.id === action.id) {
+                        return {text: task.text, isDone: task.isDone, editMode: false, id: action.id}
                     } else return task
                 })],
                 tempTaskTextOfEditMode: null,
@@ -82,14 +83,14 @@ const taskListReducer = (state = initialState, action) => {
             }
         case SET_NEW_TASK_TEXT:
             return {
-                ...state, tasks: [...state.tasks.map((task, i) => {
-                    if (i === action.id) {
-                        return {text: state.tempTaskTextOfEditMode, isDone: task.isDone, editMode: task.editMode}
+                ...state, tasks: [...state.tasks.map((task) => {
+                    if (task.id === action.id) {
+                        return {text: state.tempTaskTextOfEditMode, isDone: task.isDone, editMode: task.editMode, id: action.id}
                     } else return task
                 })]
             }
         case SET_NEW_TASK:
-            const newTask = {text: undefined, isDone: false, editMode: false}
+            const newTask = {text: undefined, isDone: false, editMode: false, id: state.tasks.length}
             return {
                 ...state, tasks: [...state.tasks, newTask],
                 addNewTaskMode: true
@@ -105,6 +106,11 @@ const taskListReducer = (state = initialState, action) => {
             return {
                 ...state,
                 chosenTask: action.id
+            }
+        case SET_HIDE_DONE_TASK:
+            return {
+                ...state,
+                hideDoneTask: action.needToHide
             }
         default:
             return state;
@@ -161,10 +167,14 @@ const setErrorMessage = (error) => {
 
 
 /* AC фиксирует id выбранной задачи в режиме ширины экрана до 620 пикселей */
-export const setChosenTask  = (id=null) => {
+export const setChosenTask = (id = null) => {
     return {type: SET_CHOSEN_TASK, id}
 }
 
+/* AC  */
+export const setHideDoneTask = (needToHide) => {
+    return {type: SET_HIDE_DONE_TASK, needToHide}
+}
 
 
 /* THUNK CREATORS  */

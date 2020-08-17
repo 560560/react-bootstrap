@@ -34,21 +34,21 @@ const Task = ({
 
                     <Col className="col-1 text-right p-0 task-checkbox">
                         <img src={task.isDone ? checkboxDoneIcon : checkboxIcon} alt="checkbox" height="24px" onClick={() => {
-                            !task.editMode && setTaskStatus(i)
+                            !task.editMode && setTaskStatus(task.id)
                         }}/>
                     </Col>
 
 
                     {/* /////////////////////////// Отрисовка порядкового номера /////////////////////////// */}
 
-                    <Col className="col-1 text-right p-sm-0 pl-3 task-number">{i + 1}.</Col>
+                    <Col className="col-1 text-right p-sm-0 pl-3 task-number">{i+1}.</Col>
 
 
                     {/* /////////////////////////// Блок отрисовки текста задачи и блок режима редактирования текста /////////////////////////// */}
 
                     {task.editMode
 
-                        ? <Col className="col-sm-8 col-10 edit-task-input"><TextareaAutosize type="text" id={i} value={originalValue} ref={textValue}
+                        ? <Col className="col-sm-8 col-10 edit-task-input"><TextareaAutosize type="text" id={task.id} value={originalValue} ref={textValue}
                                                                                              autoFocus={true}
                                                                                              autoComplete="off"
                                                                                              onChange={() => changeTaskText(task.text)}/>
@@ -58,9 +58,9 @@ const Task = ({
 
                             ? <Col className={task.isDone ? "col-sm-8 col-10 task-done pl-2" : "task col-sm-8 col-10 pr-sm-4"}
                                    onClick={() => {
-                                       chosenTask === i
+                                       chosenTask === task.id
                                        ? setChosenTask()
-                                       : setChosenTask(i)
+                                       : setChosenTask(task.id)
                                    }}
                                    >{task.text}</Col>
 
@@ -72,14 +72,14 @@ const Task = ({
                     {/* /////////////////////////// Блок отрисовки кнопки включения редактирования задачи и принятия редактирования /////////////////////////// */}
                     {task.editMode
 
-                        ? <Col className="apply-task col-sm-1 text-sm-right"><img src={applyTaskIcon} alt="Apply changes" onClick={() => setApplyChanges(i)}/>
+                        ? <Col className="apply-task col-sm-1 text-sm-right"><img src={applyTaskIcon} alt="Apply changes" onClick={() => setApplyChanges(task.id)}/>
                             <IconDescription dsc={"apply"}/>
                         </Col>
                         : !task.isDone
 
                             ? <Col className="edit-task col-sm-1 text-sm-right"><img src={editTaskIcon} alt="Edit task"
                                                                                      onClick={() => {
-                                                                                         !globalEditMode && activateEditMode(i, task.text)
+                                                                                         !globalEditMode && activateEditMode(task.id, task.text)
                                                                                      }}/><IconDescription dsc={"edit"}/>
                             </Col>
 
@@ -91,11 +91,11 @@ const Task = ({
 
                     {task.editMode
 
-                        ? <Col className="cancel-edit col-sm-1 "><img src={cancelEditIcon} alt="Cancel edit" onClick={() => setCancelEdition(i)}/>
+                        ? <Col className="cancel-edit col-sm-1 "><img src={cancelEditIcon} alt="Cancel edit" onClick={() => setCancelEdition(task.id)}/>
                             <IconDescription dsc={"cancel"}/>
                         </Col>
 
-                        : <Col className="delete-task col-sm-1"><img src={deleteTaskIcon} alt="Delete task" onClick={() => deleteTask(i)}/>
+                        : <Col className="delete-task col-sm-1"><img src={deleteTaskIcon} alt="Delete task" onClick={() => deleteTask(task.id)}/>
                             <IconDescription dsc={"delete"}/>
                         </Col>
                     }
@@ -104,17 +104,17 @@ const Task = ({
             </li>
 
             {/* /////////////////////////// Блок отрисовки кнопок для узких экранов /////////////////////////// */}
-            {chosenTask === i && screenWidth < 621
+            {chosenTask === task.id && screenWidth < 621
                 ? task.editMode
                     ? <div className="buttons-block">
-                        <Button onClick={() => setApplyChanges(i)} variant="success">Apply</Button>
-                        <Button onClick={() => setCancelEdition(i)} variant="warning">Cancel</Button>
+                        <Button onClick={() => setApplyChanges(task.id)} variant="success">Apply</Button>
+                        <Button onClick={() => setCancelEdition(task.id)} variant="warning">Cancel</Button>
                     </div>
                     : <div className="buttons-block">
                         <Button disabled={task.isDone} onClick={() => {
-                            !globalEditMode && activateEditMode(i, task.text)
+                            !globalEditMode && activateEditMode(task.id, task.text)
                         }} variant="success">Edit</Button>
-                        <Button onClick={() => deleteTask(i)} variant="danger">Delete</Button>
+                        <Button onClick={() => deleteTask(task.id)} variant="danger">Delete</Button>
                     </div>
                 : <div className="buttons-block-hidden">
                     <Button>Edit</Button>
